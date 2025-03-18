@@ -32,9 +32,17 @@ if (app.Environment.IsDevelopment())
 
 // Apply middleware
 app.UseHttpsRedirection();
+app.UseRouting();
+
 app.UseCors("AllowBlazorClient"); // Apply CORS policy
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Explicitly handle OPTIONS (preflight) requests
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers().RequireCors("AllowBlazorClient");
+});
 
 app.Run();

@@ -1,5 +1,6 @@
 ﻿@page "/chat"
 @using BlazorChatApp.Shared.Models
+@inject HttpClient httpClient
 
 <h3>Chat</h3>
 
@@ -20,11 +21,9 @@
     private string user = "";
     private string message = "";
     private List<ChatMessage> messages = new();
-    private HttpClient httpClient;
 
     protected override async Task OnInitializedAsync()
     {
-        httpClient = new HttpClient { BaseAddress = new Uri("https://blazor-chat-api-enh3c5gsd8b7becz.westeurope-01.azurewebsites.net") };
         await LoadMessagesPeriodically();
     }
 
@@ -41,7 +40,7 @@
     {
         try
         {
-            messages = await httpClient.GetFromJsonAsync<List<ChatMessage>>("api/chat") ?? new List<ChatMessage>();
+            messages = await httpClient.GetFromJsonAsync<List<ChatMessage>>("chat") ?? new List<ChatMessage>();
         }
         catch (Exception ex)
         {
@@ -54,7 +53,7 @@
         if (!string.IsNullOrWhiteSpace(user) && !string.IsNullOrWhiteSpace(message))
         {
             var newMessage = new ChatMessage { User = user, Message = message };
-            await httpClient.PostAsJsonAsync("api/chat", newMessage);
+            await httpClient.PostAsJsonAsync("chat", newMessage);
             message = ""; // Clear input field
         }
     }

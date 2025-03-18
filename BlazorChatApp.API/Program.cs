@@ -10,12 +10,12 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowBlazorClient",
         policy => policy
             .WithOrigins(
-                "https://localhost:7183", // Client HTTPS
-                "https://localhost:7256", // API HTTPS
-                "http://localhost:5120",  // Client HTTP
-                "http://localhost:5054",  // API HTTP
+                "https://localhost:7183", // Local Client HTTPS
+                "https://localhost:7256", // Local API HTTPS
+                "http://localhost:5120",  // Local Client HTTP
+                "http://localhost:5054",  // Local API HTTP
                 "https://blazor-chat-api-enh3c5gsd8b7becz.westeurope-01.azurewebsites.net", // Deployed API
-                "https://blazor-chat-app.azurestaticapps.net" // Deployed Blazor WASM
+                "https://ambitious-ocean-0fb1e3b03.6.azurestaticapps.net" // Deployed Blazor WASM
             )
             .AllowAnyMethod()
             .AllowAnyHeader()

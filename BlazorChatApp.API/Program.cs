@@ -7,11 +7,19 @@ builder.Services.AddOpenApi();
 // Enable CORS (Allow Blazor WASM frontend to call API)
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowBlazorWasm",
+    options.AddPolicy("AllowBlazorClient",
         policy => policy
-            .WithOrigins("https://blazor-chat-app.azurestaticapps.net") // Replace with your actual WASM URL
+            .WithOrigins(
+                "https://localhost:7183", // Client HTTPS
+                "https://localhost:7256", // API HTTPS
+                "http://localhost:5120",  // Client HTTP
+                "http://localhost:5054",  // API HTTP
+                "https://blazor-chat-api-enh3c5gsd8b7becz.westeurope-01.azurewebsites.net", // Deployed API
+                "https://blazor-chat-app.azurestaticapps.net" // Deployed Blazor WASM
+            )
             .AllowAnyMethod()
-            .AllowAnyHeader());
+            .AllowAnyHeader()
+            .AllowCredentials());
 });
 
 var app = builder.Build();
@@ -24,7 +32,7 @@ if (app.Environment.IsDevelopment())
 
 // Apply middleware
 app.UseHttpsRedirection();
-app.UseCors("AllowBlazorWasm"); // Apply CORS policy
+app.UseCors("AllowBlazorClient"); // Apply CORS policy
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,4 +1,4 @@
-﻿namespace BlazorChatApp.API.Models
+﻿namespace BlazorChatApp.Shared.Models
 {
     public class ChatMessage
     {

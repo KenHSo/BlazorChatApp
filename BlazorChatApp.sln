@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChatApp.Client", "BlazorChatApp.Client\BlazorChatApp.Client.csproj", "{6772C614-2029-46CF-8309-1FA03E319E52}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChatApp.API", "BlazorChatApp.API\BlazorChatApp.API.csproj", "{6DA76586-1D55-4B48-AED4-5DC1E65E43A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChatApp.Shared", "BlazorChatApp.Shared\BlazorChatApp.Shared.csproj", "{41ADE286-6C4A-4AAD-ABE4-A774ED7CC6D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6DA76586-1D55-4B48-AED4-5DC1E65E43A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DA76586-1D55-4B48-AED4-5DC1E65E43A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DA76586-1D55-4B48-AED4-5DC1E65E43A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41ADE286-6C4A-4AAD-ABE4-A774ED7CC6D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41ADE286-6C4A-4AAD-ABE4-A774ED7CC6D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41ADE286-6C4A-4AAD-ABE4-A774ED7CC6D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41ADE286-6C4A-4AAD-ABE4-A774ED7CC6D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

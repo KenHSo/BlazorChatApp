@@ -1,4 +1,4 @@
-﻿using BlazorChatApp.API.Models;
+﻿using BlazorChatApp.Shared.Models; // Use the shared model
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorChatApp.API.Controllers

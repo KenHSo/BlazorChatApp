@@ -1,0 +1,69 @@
+﻿@page "/chat"
+@using BlazorChatApp.Shared.Models
+
+<h3>Chat</h3>
+
+<div>
+    <input @bind="user" placeholder="Your name" />
+    <input @bind="message" placeholder="Your message" @onkeypress="@(e => OnEnter(e))" />
+    <button @onclick="SendMessage">Send</button>
+</div>
+
+<ul>
+    @foreach (var chatMessage in messages)
+    {
+        <li><strong>@chatMessage.User:</strong> @chatMessage.Message (@chatMessage.Timestamp.ToLocalTime())</li>
+    }
+</ul>
+
+@code {
+    private string user = "";
+    private string message = "";
+    private List<ChatMessage> messages = new();
+    private HttpClient httpClient;
+
+    protected override async Task OnInitializedAsync()
+    {
+        httpClient = new HttpClient { BaseAddress = new Uri("https://blazor-chat-api-enh3c5gsd8b7becz.westeurope-01.azurewebsites.net") };
+        await LoadMessagesPeriodically();
+    }
+
+    private async Task LoadMessagesPeriodically()
+    {
+        while (true)
+        {
+            await LoadMessages();
+            await Task.Delay(5000); // Fetch new messages every 5 seconds
+        }
+    }
+
+    private async Task LoadMessages()
+    {
+        try
+        {
+            messages = await httpClient.GetFromJsonAsync<List<ChatMessage>>("api/chat") ?? new List<ChatMessage>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching messages: {ex.Message}");
+        }
+    }
+
+    private async Task SendMessage()
+    {
+        if (!string.IsNullOrWhiteSpace(user) && !string.IsNullOrWhiteSpace(message))
+        {
+            var newMessage = new ChatMessage { User = user, Message = message };
+            await httpClient.PostAsJsonAsync("api/chat", newMessage);
+            message = ""; // Clear input field
+        }
+    }
+
+    private async Task OnEnter(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await SendMessage();
+        }
+    }
+}
